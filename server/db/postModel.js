@@ -5,6 +5,7 @@ const postSchema = new Schema({
   username: { type: String, required: true },
   img: { type: String, required: true },
   logo: { type: String },
+  likes: { type: Number, default: 1 },
   caption: { type: String },
   comments: [{
     user: String,

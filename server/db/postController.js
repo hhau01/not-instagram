@@ -16,6 +16,6 @@ module.exports = {
       logo: 'https://avatars3.githubusercontent.com/u/12615402?s=460&v=4',
       caption: '',
       comments: [{ user: 'billy', msg: 'cooool' }, { user: 'bobby', msg: 'so cool' }],
-    }).then(next);
+    }).then(() => next());
   },
 };
