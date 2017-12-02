@@ -1,0 +1,282 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background: #fafafa;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+#header {
+  width: 100%;
+  height: 77px;
+  background: white;
+  border-bottom: 1px solid rgba(0, 0, 0, .0975);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  -webkit-transition: height 0.3s;
+  -moz-transition: height 0.3s;
+  -ms-transition: height 0.3s;
+  -o-transition: height 0.3s;
+  transition: height 0.3s;
+}
+
+#header #navbar {
+  max-width: 1010px;
+  width: 100%;
+  height: 77px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.smaller-bar {
+  height: 52px;
+}
+
+#header .brand {
+  display: block;
+  background: url('./imgs/insta-sprites.png') -312px -286px no-repeat;
+  height: 30px;
+  width: 30px;
+  margin-right: 146px;
+  margin-left: 32px;
+  cursor: pointer;
+}
+
+#header .brand-name {
+  display: block;
+  background: url('./imgs/insta-sprites.png') -177px 0px no-repeat;
+  height: 35px;
+  width: 176px;
+  margin-right: auto;
+  margin-left: 32px;
+  cursor: pointer;
+}
+
+#header #searchbar {
+  background: #fafafa;
+  border: 1px solid #dbdbdb;
+  border-radius: 3px;
+  color: #999;
+  margin-left: 190px;
+  font-weight: 300;
+  padding: 4px 20px 4px 10px;
+  min-width: 180px;
+}
+
+#header #searchbar i {
+  opacity: .7;
+  font-size: 11px;
+  padding-right: 3px;
+  cursor: text;
+}
+
+#header #searchbar input {
+  background: #fafafa;
+  border: none;
+  font-weight: 300;
+}
+
+#header #searchbar input:focus {
+  outline: none;
+}
+
+.icon {
+  color: #003569;
+  display: block;
+  height: 24px;
+  width: 24px;
+  margin-left: 30px;
+}
+
+#header #iconbar {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: 48px;
+}
+
+#header #explore {
+  background: url('./imgs/insta-sprites.png') -387px -104px no-repeat;
+}
+
+#header #likes {
+  background: url('./imgs/insta-sprites.png') -338px -336px no-repeat;
+}
+
+#header #me {
+  background: url('./imgs/insta-sprites.png') -287px -179px no-repeat;
+}
+
+#feed {
+  display: block;
+  max-width: 600px;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#feed .box {
+  width: 100%;
+  background: white;
+  margin-bottom: 60px;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+}
+
+#feed .box:first-child {
+  margin-top: 80px;
+}
+
+#feed .header {
+  border-bottom: 1px solid #efefef;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 16px;
+  align-items: center;
+}
+
+#feed .logo {
+  width: 30px;
+  height: 30px;
+  background: darkslategrey;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  margin-right: 10px;
+}
+
+#feed .username {
+  color: #262626;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#feed .box-img img {
+  width: 100%;
+  max-height: 750px;
+  border-bottom: 1px solid #efefef;
+}
+
+#feed .bottom-section {
+  padding: 0 16px;
+}
+
+#feed .action-bar {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4px;
+}
+
+#feed .like-btn {
+  background: url('./imgs/insta-sprites.png') -208px -336px no-repeat;
+  margin: 8px 16px 8px 0;
+  cursor: pointer;  
+}
+
+#feed .like-btn-red {
+  background: url('./imgs/insta-sprites.png') -182px -336px no-repeat;
+  margin: 8px 16px 8px 0;
+  cursor: pointer;  
+}
+
+#feed .comment-btn {
+  background: url('./imgs/insta-sprites.png') -355px -263px no-repeat;
+  margin: 8px 16px 8px 0;
+  cursor: pointer;  
+}
+
+#feed .like-count {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#feed .user-caption {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#feed .hashtag {
+  color: #003569;
+  cursor: pointer;
+}
+
+#feed .comment {
+  padding-bottom: 5px;
+}
+
+#feed .caption {
+  padding-left: 2px;
+}
+
+#feed .time-posted {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: .2px;
+  line-height: 18px;
+  color: #999;
+  margin-top: 3px;
+  margin-bottom: 8px;
+}
+
+#feed .comment-bar {
+  border-top: 1px solid #efefef;
+}
+
+#feed .comment-section {
+  display: flex;
+  flex-direction: row;
+}
+
+#feed textarea {
+  border: 0 0;
+  width: 542px;
+  height: 18px;
+  max-height: 80px;
+  border: none;
+  resize: none;
+  outline: none;
+  overflow: hidden;
+  margin-top: 19px;
+  margin-bottom: 19px;
+  box-sizing: border-box;
+}
+
+#feed .more-btn {
+  display: block;
+  background: url('./imgs/insta-sprites.png') -276px -115px no-repeat;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+
+#feed .mospace {
+  padding-top: 19px;
+  padding-bottom: 19px;
+  line-height: 52px;
+  align-content: middle;
+}
+
+.huge {
+  font-size: 20px;
+}
