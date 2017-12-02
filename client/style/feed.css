@@ -14,6 +14,10 @@ body {
 }
 
 .center {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
   margin: 0 auto;
 }
 
@@ -53,7 +57,7 @@ body {
 
 #header .brand {
   display: block;
-  background: url('./imgs/insta-sprites.png') -312px -286px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -312px -286px no-repeat;
   height: 30px;
   width: 30px;
   margin-right: 146px;
@@ -63,7 +67,7 @@ body {
 
 #header .brand-name {
   display: block;
-  background: url('./imgs/insta-sprites.png') -177px 0px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -177px 0px no-repeat;
   height: 35px;
   width: 176px;
   margin-right: auto;
@@ -115,15 +119,15 @@ body {
 }
 
 #header #explore {
-  background: url('./imgs/insta-sprites.png') -387px -104px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -387px -104px no-repeat;
 }
 
 #header #likes {
-  background: url('./imgs/insta-sprites.png') -338px -336px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -338px -336px no-repeat;
 }
 
 #header #me {
-  background: url('./imgs/insta-sprites.png') -287px -179px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -287px -179px no-repeat;
 }
 
 #feed {
@@ -189,19 +193,19 @@ body {
 }
 
 #feed .like-btn {
-  background: url('./imgs/insta-sprites.png') -208px -336px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -208px -336px no-repeat;
   margin: 8px 16px 8px 0;
   cursor: pointer;  
 }
 
 #feed .like-btn-red {
-  background: url('./imgs/insta-sprites.png') -182px -336px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -182px -336px no-repeat;
   margin: 8px 16px 8px 0;
   cursor: pointer;  
 }
 
 #feed .comment-btn {
-  background: url('./imgs/insta-sprites.png') -355px -263px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -355px -263px no-repeat;
   margin: 8px 16px 8px 0;
   cursor: pointer;  
 }
@@ -226,7 +230,7 @@ body {
 }
 
 #feed .caption {
-  padding-left: 2px;
+  padding-left: 5px;
 }
 
 #feed .time-posted {
@@ -264,7 +268,7 @@ body {
 
 #feed .more-btn {
   display: block;
-  background: url('./imgs/insta-sprites.png') -276px -115px no-repeat;
+  background: url('./../../assets/imgs/insta-sprites.png') -276px -115px no-repeat;
   height: 16px;
   width: 16px;
   cursor: pointer;

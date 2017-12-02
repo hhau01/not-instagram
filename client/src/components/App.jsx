@@ -1,5 +1,7 @@
 // import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
+import Navbar from './Navbar.jsx';
+import Feed from './Feed.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +10,10 @@ class App extends Component {
   }
   render() {
     return (
-      <div>Hellooo</div>
+      <div>
+        <Navbar />
+        <Feed />
+      </div>
     );
   }
 }
