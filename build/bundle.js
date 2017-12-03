@@ -21889,11 +21889,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Navbar = __webpack_require__(218);
+	var _axios = __webpack_require__(185);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Navbar = __webpack_require__(211);
 
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 
-	var _Feed = __webpack_require__(185);
+	var _Feed = __webpack_require__(212);
 
 	var _Feed2 = _interopRequireDefault(_Feed);
 
@@ -21906,6 +21910,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import fetch from 'isomorphic-fetch';
 
 
+	var postStore = [];
+
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 
@@ -21914,79 +21920,16 @@
 
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-	    _this.state = {};
-	    return _this;
-	  }
-
-	  _createClass(App, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_Navbar2.default, null),
-	        _react2.default.createElement(_Feed2.default, null)
-	      );
-	    }
-	  }]);
-
-	  return App;
-	}(_react.Component);
-
-	exports.default = App;
-
-/***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _FeedItem = __webpack_require__(186);
-
-	var _FeedItem2 = _interopRequireDefault(_FeedItem);
-
-	var _axios = __webpack_require__(187);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import fetch from 'isomorphic-fetch';
-
-
-	var postStore = [];
-
-	var Feed = function (_Component) {
-	  _inherits(Feed, _Component);
-
-	  function Feed(props) {
-	    _classCallCheck(this, Feed);
-
-	    var _this = _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
-
 	    _this.state = {
 	      postsList: postStore
 	    };
 	    _this.fetchPosts = _this.fetchPosts.bind(_this);
 	    _this.createPost = _this.createPost.bind(_this);
+	    _this.handleForm = _this.handleForm.bind(_this);
 	    return _this;
 	  }
 
-	  _createClass(Feed, [{
+	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.fetchPosts();
@@ -22015,149 +21958,56 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleForm',
+	    value: function handleForm(user, value) {
+	      console.log('user', user);
+	      console.log('value', value);
+	      this.createPost({ username: user, url: value });
+	      //  = '';
+	      event.preventDefault();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // const postElements = this.state.postsList.reverse().map((x) => {
-	      //   // return <li>{JSON.stringify(x)}</li>;
-	      //   return <FeedItem />;
-	      // });
+	      var _this4 = this;
+
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'feed', className: 'center' },
-	        _react2.default.createElement(_FeedItem2.default, null)
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this4.createPost({ username: 'samuelljackson', img: 'http://a.fod4.com/images/user_photos/1261160/d615e236496311f61c43e71edb0577b3_original.jpg', liked: true, likes: 981137383, logo: 'http://www.indiewire.com/wp-content/uploads/2014/02/samuel-l-jackson.jpg', caption: 'Muthafucking Siri' });
+	            } },
+	          'Boop'
+	        ),
+	        _react2.default.createElement(_Navbar2.default, { handleForm: this.handleForm }),
+	        _react2.default.createElement(_Feed2.default, { postsList: this.state.postsList })
 	      );
 	    }
 	  }]);
 
-	  return Feed;
+	  return App;
 	}(_react.Component);
 
-	exports.default = Feed;
+	exports.default = App;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(186);
 
 /***/ }),
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FeedItem = function FeedItem(props) {
-	  var handleClick = props.handleClick,
-	      letter = props.letter,
-	      row = props.row,
-	      square = props.square;
-
-
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "box" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "header" },
-	      _react2.default.createElement("img", { className: "logo", src: "https://avatars3.githubusercontent.com/u/12615402?s=460&v=4", onError: "this.style.background='darkslategrey'" }),
-	      _react2.default.createElement(
-	        "span",
-	        { className: "username" },
-	        "henryau"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "box-img" },
-	      _react2.default.createElement("img", { src: "http://i0.kym-cdn.com/entries/icons/original/000/019/367/gollum_395_394.jpg", onError: "this.src='./../../../assets/imgs/404.jpg'" })
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "bottom-section" },
-	      _react2.default.createElement(
-	        "div",
-	        { className: "action-bar" },
-	        _react2.default.createElement("span", { className: "icon like-btn" }),
-	        _react2.default.createElement("span", { className: "icon comment-btn" })
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "like-count" },
-	        _react2.default.createElement(
-	          "span",
-	          { className: "num-likes" },
-	          "8,218"
-	        ),
-	        " likes"
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "user-caption" },
-	        _react2.default.createElement(
-	          "span",
-	          { className: "username" },
-	          "henryau"
-	        ),
-	        _react2.default.createElement(
-	          "span",
-	          { className: "caption" },
-	          "Me"
-	        )
-	      ),
-	      _react2.default.createElement("div", { className: "comment-list" }),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "time-posted" },
-	        "3 hours ago"
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "comment-bar" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "comment-section" },
-	          _react2.default.createElement("textarea", { className: "add-comment", placeholder: "Add a comment..." }),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "mospace" },
-	            _react2.default.createElement("span", { className: "more-btn" })
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-
-	// FeedItem.propTypes = {
-	//   handleClick: PropTypes.func.isRequired,
-	//   letter: PropTypes.string,
-	//   row: PropTypes.number.isRequired,
-	//   square: PropTypes.number.isRequired
-	// };
-
-	// import fetch from 'isomorphic-fetch';
-	exports.default = FeedItem;
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(188);
-
-/***/ }),
-/* 188 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var utils = __webpack_require__(189);
-	var bind = __webpack_require__(190);
-	var Axios = __webpack_require__(192);
-	var defaults = __webpack_require__(193);
+	var utils = __webpack_require__(187);
+	var bind = __webpack_require__(188);
+	var Axios = __webpack_require__(190);
+	var defaults = __webpack_require__(191);
 
 	/**
 	 * Create an instance of Axios
@@ -22190,15 +22040,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(210);
-	axios.CancelToken = __webpack_require__(211);
-	axios.isCancel = __webpack_require__(207);
+	axios.Cancel = __webpack_require__(208);
+	axios.CancelToken = __webpack_require__(209);
+	axios.isCancel = __webpack_require__(205);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(212);
+	axios.spread = __webpack_require__(210);
 
 	module.exports = axios;
 
@@ -22207,13 +22057,13 @@
 
 
 /***/ }),
-/* 189 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(190);
-	var isBuffer = __webpack_require__(191);
+	var bind = __webpack_require__(188);
+	var isBuffer = __webpack_require__(189);
 
 	/*global toString:true*/
 
@@ -22516,7 +22366,7 @@
 
 
 /***/ }),
-/* 190 */
+/* 188 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -22533,7 +22383,7 @@
 
 
 /***/ }),
-/* 191 */
+/* 189 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -22560,15 +22410,15 @@
 
 
 /***/ }),
-/* 192 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(193);
-	var utils = __webpack_require__(189);
-	var InterceptorManager = __webpack_require__(204);
-	var dispatchRequest = __webpack_require__(205);
+	var defaults = __webpack_require__(191);
+	var utils = __webpack_require__(187);
+	var InterceptorManager = __webpack_require__(202);
+	var dispatchRequest = __webpack_require__(203);
 
 	/**
 	 * Create a new instance of Axios
@@ -22645,13 +22495,13 @@
 
 
 /***/ }),
-/* 193 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(189);
-	var normalizeHeaderName = __webpack_require__(194);
+	var utils = __webpack_require__(187);
+	var normalizeHeaderName = __webpack_require__(192);
 
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -22667,10 +22517,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(195);
+	    adapter = __webpack_require__(193);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(195);
+	    adapter = __webpack_require__(193);
 	  }
 	  return adapter;
 	}
@@ -22744,12 +22594,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 194 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -22762,18 +22612,18 @@
 
 
 /***/ }),
-/* 195 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(189);
-	var settle = __webpack_require__(196);
-	var buildURL = __webpack_require__(199);
-	var parseHeaders = __webpack_require__(200);
-	var isURLSameOrigin = __webpack_require__(201);
-	var createError = __webpack_require__(197);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(202);
+	var utils = __webpack_require__(187);
+	var settle = __webpack_require__(194);
+	var buildURL = __webpack_require__(197);
+	var parseHeaders = __webpack_require__(198);
+	var isURLSameOrigin = __webpack_require__(199);
+	var createError = __webpack_require__(195);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(200);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -22870,7 +22720,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(203);
+	      var cookies = __webpack_require__(201);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -22949,12 +22799,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 196 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(197);
+	var createError = __webpack_require__(195);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -22981,12 +22831,12 @@
 
 
 /***/ }),
-/* 197 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(198);
+	var enhanceError = __webpack_require__(196);
 
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -23005,7 +22855,7 @@
 
 
 /***/ }),
-/* 198 */
+/* 196 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23032,12 +22882,12 @@
 
 
 /***/ }),
-/* 199 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -23106,12 +22956,12 @@
 
 
 /***/ }),
-/* 200 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	// Headers whose duplicates are ignored by node
 	// c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -23165,12 +23015,12 @@
 
 
 /***/ }),
-/* 201 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -23239,7 +23089,7 @@
 
 
 /***/ }),
-/* 202 */
+/* 200 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23281,12 +23131,12 @@
 
 
 /***/ }),
-/* 203 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -23340,12 +23190,12 @@
 
 
 /***/ }),
-/* 204 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -23398,17 +23248,17 @@
 
 
 /***/ }),
-/* 205 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
-	var transformData = __webpack_require__(206);
-	var isCancel = __webpack_require__(207);
-	var defaults = __webpack_require__(193);
-	var isAbsoluteURL = __webpack_require__(208);
-	var combineURLs = __webpack_require__(209);
+	var utils = __webpack_require__(187);
+	var transformData = __webpack_require__(204);
+	var isCancel = __webpack_require__(205);
+	var defaults = __webpack_require__(191);
+	var isAbsoluteURL = __webpack_require__(206);
+	var combineURLs = __webpack_require__(207);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -23490,12 +23340,12 @@
 
 
 /***/ }),
-/* 206 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(189);
+	var utils = __webpack_require__(187);
 
 	/**
 	 * Transform the data for a request or a response
@@ -23516,7 +23366,7 @@
 
 
 /***/ }),
-/* 207 */
+/* 205 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23527,7 +23377,7 @@
 
 
 /***/ }),
-/* 208 */
+/* 206 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23547,7 +23397,7 @@
 
 
 /***/ }),
-/* 209 */
+/* 207 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23567,7 +23417,7 @@
 
 
 /***/ }),
-/* 210 */
+/* 208 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23592,12 +23442,12 @@
 
 
 /***/ }),
-/* 211 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(210);
+	var Cancel = __webpack_require__(208);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -23655,7 +23505,7 @@
 
 
 /***/ }),
-/* 212 */
+/* 210 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23688,12 +23538,7 @@
 
 
 /***/ }),
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23708,10 +23553,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _axios = __webpack_require__(187);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23720,8 +23561,9 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import fetch from 'isomorphic-fetch';
 
-	// import FeedItem from './FeedItem.jsx';
 
+	// import FeedItem from './FeedItem.jsx';
+	// import axios from 'axios';
 
 	var Navbar = function (_Component) {
 	  _inherits(Navbar, _Component);
@@ -23731,27 +23573,18 @@
 
 	    var _this = _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this, props));
 
-	    _this.state = {};
-	    _this.createPost = _this.createPost.bind(_this);
+	    _this.state = {
+	      value: '',
+	      currUser: 'morganfreeman'
+	    };
 	    return _this;
 	  }
 
 	  _createClass(Navbar, [{
-	    key: 'createPost',
-	    value: function createPost(bodyObj) {
-	      var _this2 = this;
-
-	      _axios2.default.post('/posts', bodyObj).then(function () {
-	        return _this2.fetchPosts();
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // const postElements = this.state.postsList.reverse().map((x) => {
-	      //   // return <li>{JSON.stringify(x)}</li>;
-	      //   return <FeedItem />;
-	      // });
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'header' },
@@ -23766,7 +23599,15 @@
 	          _react2.default.createElement(
 	            'div',
 	            { id: 'searchbar' },
-	            _react2.default.createElement('input', { name: 'url', type: 'text', placeholder: 'Search' })
+	            _react2.default.createElement(
+	              'form',
+	              { method: 'POST', action: '/posts', onSubmit: function onSubmit() {
+	                  return _this2.props.handleForm(_this2.state.currUser, _this2.state.value);
+	                } },
+	              _react2.default.createElement('input', { value: this.state.value, onChange: function onChange(e) {
+	                  return _this2.setState({ value: e.target.value });
+	                }, name: 'url', type: 'text', placeholder: 'Add New Post' })
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -23796,6 +23637,182 @@
 	}(_react.Component);
 
 	exports.default = Navbar;
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _FeedItem = __webpack_require__(213);
+
+	var _FeedItem2 = _interopRequireDefault(_FeedItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import fetch from 'isomorphic-fetch';
+	var Feed = function Feed(props) {
+	  var postsList = props.postsList;
+
+
+	  var postElements = postsList.reverse().map(function (post) {
+	    return _react2.default.createElement(_FeedItem2.default, { key: post.createdAt, username: post.username, img: post.img, logo: post.logo, liked: post.liked, likes: post.likes, caption: post.caption, comments: post.comments, createdAt: post.createdAt });
+	    // return JSON.stringify(post);
+	  });
+	  return _react2.default.createElement(
+	    'div',
+	    { id: 'feed', className: 'center' },
+	    postElements
+	  );
+	};
+
+	// FeedItem.propTypes = {
+	//   handleClick: PropTypes.func.isRequired,
+	//   letter: PropTypes.string,
+	//   row: PropTypes.number.isRequired,
+	//   square: PropTypes.number.isRequired
+	// };
+
+	exports.default = Feed;
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FeedItem = function FeedItem(props) {
+	  var username = props.username,
+	      img = props.img,
+	      logo = props.logo,
+	      liked = props.liked,
+	      likes = props.likes,
+	      caption = props.caption,
+	      comments = props.comments,
+	      createdAt = props.createdAt;
+
+	  var commentElements = comments.map(function (comment) {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "comment" },
+	      _react2.default.createElement(
+	        "span",
+	        { className: "username" },
+	        comment.username
+	      ),
+	      _react2.default.createElement(
+	        "span",
+	        { className: "caption" },
+	        comment.msg
+	      )
+	    );
+	  });
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "box" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "header" },
+	      _react2.default.createElement("img", { className: "logo", src: logo, onError: "this.style.background='darkslategrey'" }),
+	      _react2.default.createElement(
+	        "span",
+	        { className: "username" },
+	        username
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "box-img" },
+	      _react2.default.createElement("img", { src: img, onError: "this.src='./../../../assets/imgs/404.jpg'" })
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "bottom-section" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "action-bar" },
+	        _react2.default.createElement("span", { className: "icon like-btn" }),
+	        _react2.default.createElement("span", { className: "icon comment-btn" })
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "like-count" },
+	        _react2.default.createElement(
+	          "span",
+	          { className: "num-likes" },
+	          likes.toLocaleString()
+	        ),
+	        " likes"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "user-caption" },
+	        _react2.default.createElement(
+	          "span",
+	          { className: "username" },
+	          username
+	        ),
+	        _react2.default.createElement(
+	          "span",
+	          { className: "caption" },
+	          caption
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "comment-list" },
+	        commentElements
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "time-posted" },
+	        "3 hours ago"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "comment-bar" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "comment-section" },
+	          _react2.default.createElement("textarea", { className: "add-comment", placeholder: "Add a comment..." }),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "mospace" },
+	            _react2.default.createElement("span", { className: "more-btn" })
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+	// FeedItem.propTypes = {
+	//   handleClick: PropTypes.func.isRequired,
+	//   letter: PropTypes.string,
+	//   row: PropTypes.number.isRequired,
+	//   square: PropTypes.number.isRequired
+	// };
+
+	// import fetch from 'isomorphic-fetch';
+	exports.default = FeedItem;
 
 /***/ })
 /******/ ]);

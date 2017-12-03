@@ -2,16 +2,23 @@
 import React, { PropTypes } from 'react';
 
 const FeedItem = (props) => {
-  const { handleClick, letter, row, square } = props;
-
+  const { username, img, logo, liked, likes, caption, comments, createdAt } = props;
+  const commentElements = comments.map((comment) => {
+    return (
+      <div className="comment">
+        <span className="username">{comment.username}</span>
+        <span className="caption">{comment.msg}</span>
+      </div>
+    );
+  });
   return (
     <div className="box">
       <div className="header">
-        <img className="logo" src="https://avatars3.githubusercontent.com/u/12615402?s=460&amp;v=4" onError="this.style.background='darkslategrey'"></img>
-        <span className="username">henryau</span>
+        <img className="logo" src={logo} onError="this.style.background='darkslategrey'"></img>
+        <span className="username">{username}</span>
       </div>
       <div className="box-img">
-        <img src="http://i0.kym-cdn.com/entries/icons/original/000/019/367/gollum_395_394.jpg" onError="this.src='./../../../assets/imgs/404.jpg'"></img>
+        <img src={img} onError="this.src='./../../../assets/imgs/404.jpg'"></img>
       </div>
       <div className="bottom-section">
         <div className="action-bar">
@@ -19,13 +26,15 @@ const FeedItem = (props) => {
           <span className="icon comment-btn"></span>
         </div>
         <div className="like-count">
-          <span className="num-likes">8,218</span> likes
+          <span className="num-likes">{likes.toLocaleString()}</span> likes
           </div>
         <div className="user-caption">
-          <span className="username">henryau</span>
-          <span className="caption">Me</span>
+          <span className="username">{username}</span>
+          <span className="caption">{caption}</span>
         </div>
-        <div className="comment-list"></div>
+        <div className="comment-list">
+          {commentElements}
+        </div>
         <div className="time-posted">3 hours ago</div>
         <div className="comment-bar">
           <div className="comment-section">

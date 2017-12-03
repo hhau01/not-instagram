@@ -12,7 +12,7 @@ const postSchema = new Schema({
     user: String,
     msg: String,
   }],
-  created_at: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('Post', postSchema);
