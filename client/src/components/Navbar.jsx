@@ -1,7 +1,4 @@
-// import fetch from 'isomorphic-fetch';
-import React, { Component } from 'react';
-// import FeedItem from './FeedItem.jsx';
-// import axios from 'axios';
+import React, { Component, PropTypes } from 'react';
 
 class Navbar extends Component {
   constructor(props) {
@@ -32,5 +29,9 @@ class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  handleForm: PropTypes.func,
+};
 
 export default Navbar;

@@ -21924,6 +21924,7 @@
 	      postsList: postStore
 	    };
 	    _this.fetchPosts = _this.fetchPosts.bind(_this);
+	    _this.deletePosts = _this.deletePosts.bind(_this);
 	    _this.createPost = _this.createPost.bind(_this);
 	    _this.handleForm = _this.handleForm.bind(_this);
 	    return _this;
@@ -21949,12 +21950,21 @@
 	      });
 	    }
 	  }, {
-	    key: 'createPost',
-	    value: function createPost(bodyObj) {
+	    key: 'deletePosts',
+	    value: function deletePosts() {
 	      var _this3 = this;
 
-	      _axios2.default.post('/posts', bodyObj).then(function () {
+	      _axios2.default.delete('/dropall').then(function () {
 	        return _this3.fetchPosts();
+	      });
+	    }
+	  }, {
+	    key: 'createPost',
+	    value: function createPost(bodyObj) {
+	      var _this4 = this;
+
+	      _axios2.default.post('/posts', bodyObj).then(function () {
+	        return _this4.fetchPosts();
 	      });
 	    }
 	  }, {
@@ -21964,12 +21974,12 @@
 	      console.log('value', value);
 	      this.createPost({ username: user, url: value });
 	      //  = '';
-	      event.preventDefault();
+	      // event.preventDefault();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this5 = this;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -21977,9 +21987,16 @@
 	        _react2.default.createElement(
 	          'button',
 	          { onClick: function onClick() {
-	              return _this4.createPost({ username: 'samuelljackson', img: 'http://a.fod4.com/images/user_photos/1261160/d615e236496311f61c43e71edb0577b3_original.jpg', liked: true, likes: 981137383, logo: 'http://www.indiewire.com/wp-content/uploads/2014/02/samuel-l-jackson.jpg', caption: 'Muthafucking Siri' });
+	              return _this5.createPost({ username: 'samuelljackson', img: 'http://a.fod4.com/images/user_photos/1261160/d615e236496311f61c43e71edb0577b3_original.jpg', liked: true, likes: 981137383, logo: 'http://www.indiewire.com/wp-content/uploads/2014/02/samuel-l-jackson.jpg', caption: 'Muthafucking Siri' });
 	            } },
 	          'Boop'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this5.deletePosts();
+	            } },
+	          'KillAll'
 	        ),
 	        _react2.default.createElement(_Navbar2.default, { handleForm: this.handleForm }),
 	        _react2.default.createElement(_Feed2.default, { postsList: this.state.postsList })
@@ -23559,11 +23576,7 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import fetch from 'isomorphic-fetch';
-
-
-	// import FeedItem from './FeedItem.jsx';
-	// import axios from 'axios';
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Navbar = function (_Component) {
 	  _inherits(Navbar, _Component);
@@ -23636,6 +23649,10 @@
 	  return Navbar;
 	}(_react.Component);
 
+	Navbar.propTypes = {
+	  handleForm: _react.PropTypes.func
+	};
+
 	exports.default = Navbar;
 
 /***/ }),
@@ -23658,14 +23675,22 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import fetch from 'isomorphic-fetch';
 	var Feed = function Feed(props) {
 	  var postsList = props.postsList;
 
 
 	  var postElements = postsList.reverse().map(function (post) {
-	    return _react2.default.createElement(_FeedItem2.default, { key: post.createdAt, username: post.username, img: post.img, logo: post.logo, liked: post.liked, likes: post.likes, caption: post.caption, comments: post.comments, createdAt: post.createdAt });
-	    // return JSON.stringify(post);
+	    return _react2.default.createElement(_FeedItem2.default, {
+	      key: post.createdAt,
+	      username: post.username,
+	      img: post.img,
+	      logo: post.logo,
+	      liked: post.liked,
+	      likes: post.likes,
+	      caption: post.caption,
+	      comments: post.comments,
+	      createdAt: post.createdAt
+	    });
 	  });
 	  return _react2.default.createElement(
 	    'div',
@@ -23674,12 +23699,9 @@
 	  );
 	};
 
-	// FeedItem.propTypes = {
-	//   handleClick: PropTypes.func.isRequired,
-	//   letter: PropTypes.string,
-	//   row: PropTypes.number.isRequired,
-	//   square: PropTypes.number.isRequired
-	// };
+	Feed.propTypes = {
+	  postsList: _react.PropTypes.array
+	};
 
 	exports.default = Feed;
 
@@ -23731,7 +23753,7 @@
 	    _react2.default.createElement(
 	      "div",
 	      { className: "header" },
-	      _react2.default.createElement("img", { className: "logo", src: logo, onError: "this.style.background='darkslategrey'" }),
+	      _react2.default.createElement("img", { className: "logo", src: logo, alt: "./../../../assets/imgs/404.jpg" }),
 	      _react2.default.createElement(
 	        "span",
 	        { className: "username" },
@@ -23741,7 +23763,7 @@
 	    _react2.default.createElement(
 	      "div",
 	      { className: "box-img" },
-	      _react2.default.createElement("img", { src: img, onError: "this.src='./../../../assets/imgs/404.jpg'" })
+	      _react2.default.createElement("img", { src: img, alt: "./../../../assets/imgs/404.jpg" })
 	    ),
 	    _react2.default.createElement(
 	      "div",
@@ -23804,14 +23826,18 @@
 	  );
 	};
 
-	// FeedItem.propTypes = {
-	//   handleClick: PropTypes.func.isRequired,
-	//   letter: PropTypes.string,
-	//   row: PropTypes.number.isRequired,
-	//   square: PropTypes.number.isRequired
-	// };
+	FeedItem.propTypes = {
+	  username: _react.PropTypes.string,
+	  img: _react.PropTypes.string,
+	  logo: _react.PropTypes.string,
+	  liked: _react.PropTypes.bool,
+	  likes: _react.PropTypes.number,
+	  caption: _react.PropTypes.string,
+	  // comments: PropTypes.arrayOf(PropTypes.object),
+	  comments: _react.PropTypes.array,
+	  createdAt: _react.PropTypes.date
+	};
 
-	// import fetch from 'isomorphic-fetch';
 	exports.default = FeedItem;
 
 /***/ })

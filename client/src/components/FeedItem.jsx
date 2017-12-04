@@ -1,4 +1,3 @@
-// import fetch from 'isomorphic-fetch';
 import React, { PropTypes } from 'react';
 
 const FeedItem = (props) => {
@@ -14,11 +13,11 @@ const FeedItem = (props) => {
   return (
     <div className="box">
       <div className="header">
-        <img className="logo" src={logo} onError="this.style.background='darkslategrey'"></img>
+        <img className="logo" src={logo} alt="./../../../assets/imgs/404.jpg"></img>
         <span className="username">{username}</span>
       </div>
       <div className="box-img">
-        <img src={img} onError="this.src='./../../../assets/imgs/404.jpg'"></img>
+        <img src={img} alt="./../../../assets/imgs/404.jpg"></img>
       </div>
       <div className="bottom-section">
         <div className="action-bar">
@@ -27,7 +26,7 @@ const FeedItem = (props) => {
         </div>
         <div className="like-count">
           <span className="num-likes">{likes.toLocaleString()}</span> likes
-          </div>
+        </div>
         <div className="user-caption">
           <span className="username">{username}</span>
           <span className="caption">{caption}</span>
@@ -49,11 +48,16 @@ const FeedItem = (props) => {
   );
 };
 
-// FeedItem.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   letter: PropTypes.string,
-//   row: PropTypes.number.isRequired,
-//   square: PropTypes.number.isRequired
-// };
+FeedItem.propTypes = {
+  username: PropTypes.string,
+  img: PropTypes.string,
+  logo: PropTypes.string,
+  liked: PropTypes.bool,
+  likes: PropTypes.number,
+  caption: PropTypes.string,
+  // comments: PropTypes.arrayOf(PropTypes.object),
+  comments: PropTypes.array,
+  createdAt: PropTypes.date,
+};
 
 export default FeedItem;
